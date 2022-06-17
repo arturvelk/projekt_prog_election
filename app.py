@@ -38,7 +38,7 @@ def state_style(data, state,function=False):
     else:
         # Format for style_function
         state_style = {
-             'fillOpacity': 1,
+             'fillOpacity': 0.7,
              'weight': 1,
              'fillColor': color,
              'color': '#000000'}    
