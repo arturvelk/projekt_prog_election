@@ -1,0 +1,6 @@
+streamlit
+pandas
+folium
+shapely
+json
+streamlit_folium
