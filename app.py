@@ -4,9 +4,10 @@ import folium
 from shapely.geometry import Polygon, mapping
 import json
 from streamlit_folium import folium_static 
+import matplotlib.pyplot as plt, mpld3
 
 #from fun import state_style, style_function
-
+data = json.load(open("sample.json", encoding = "UTF-8"))
 
 def state_style(data, state,function=False):
     """
@@ -56,17 +57,40 @@ def style_function(feature):
     return style
 
 
-st.write("My First Streamlit Web App, csicskavok")
+def highlight_style(feature): 
+    """
+    style_function for when choropleth button
+    is highighted
+    """
+    return {'fillOpacity': 1,
+         'weight': 1}
 
-data = json.load(open("sample.json", encoding = "UTF-8"))
+
+st.write("My First Streamlit Web App, csicskavok")
 
 hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8"))
 
-m = folium.Map(location=[47, 20],zoom_start=7) 
-choropleth =folium.GeoJson(data= hu_shape,style_function=style_function)
-folium.TileLayer('cartodbdark_matter',name="dark mode",control=True).add_to(m)
-
+#plot choropleth button map
+m = folium.Map(location=[47, 20],zoom_start=7)
+choropleth =folium.GeoJson(data= hu_shape,
+                           style_function=style_function,
+                           highlight_function=highlight_style)
 folium.TileLayer('cartodbdark_matter',name="dark mode",control=True).add_to(m)
 m.add_child(choropleth)
-st.title("kezdetleges map")
+
+folium.LayerControl().add_to(m)
+choropleth.add_child(folium.features.GeoJsonTooltip
+                                (fields=['NAME_1', "SZDSZ", "FIDESZ","MSZP","FKGP","MDF"],
+                                labels=True))
+st.title("button map")
 folium_static(m)
+
+
+#m = folium.Map(location=[47, 20],zoom_start=7) 
+#choropleth =folium.GeoJson(data= hu_shape,style_function=style_function)
+#folium.TileLayer('cartodbdark_matter',name="dark mode",control=True).add_to(m)
+
+#folium.TileLayer('cartodbdark_matter',name="dark mode",control=True).add_to(m)
+#m.add_child(choropleth)
+#st.title("kezdetleges map")
+#folium_static(m)
