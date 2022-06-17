@@ -82,7 +82,7 @@ choropleth.add_child(folium.features.GeoJsonTooltip
                                 (fields=['NAME_1', "SZDSZ", "FIDESZ","MSZP","FKGP","MDF"],
                                 labels=True))
 st.title("button map")
-folium_static(m)
+m
 
 
 #m = folium.Map(location=[47, 20],zoom_start=7) 
