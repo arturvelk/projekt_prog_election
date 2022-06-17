@@ -4,3 +4,4 @@ folium
 shapely
 streamlit_folium
 json5==0.9.4
+matplotlib
