@@ -8,7 +8,7 @@ from streamlit_folium import folium_static
 
 st.write("My First Streamlit Web App, csicskavok")
 
-hu_shape = json.load(open('hu_district.geojson'))
+hu_shape = json.load(open('hu_distrcit.geojson'))
 
 m = folium.Map(location=[47, 20],zoom_start=7) 
 #choropleth =folium.GeoJson(data= hu_shape.to_json())
