@@ -5,7 +5,7 @@ from shapely.geometry import Polygon, mapping
 import json
 from streamlit_folium import folium_static 
 
-from fun import state_style, style_function
+#from fun import state_style, style_function
 
 
 def state_style(data, state,function=False):
