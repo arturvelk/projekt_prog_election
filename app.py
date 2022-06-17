@@ -5,10 +5,12 @@ from shapely.geometry import Polygon, mapping
 import json
 from streamlit_folium import folium_static 
 
-from fun.py import state_style, style_function
+from fun import state_style, style_function
 
 
 st.write("My First Streamlit Web App, csicskavok")
+
+data = json.load(open("sample.json", encoding = "UTF-8"))
 
 hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8"))
 
