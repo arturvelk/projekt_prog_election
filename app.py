@@ -51,7 +51,7 @@ def style_function(feature):
     """
 
     state = feature['properties']['NAME_1']
-    style = state_style(state,function=True)
+    style = state_style(data,state,function=True)
     
     return style
 
