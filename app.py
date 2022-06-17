@@ -4,7 +4,6 @@ import folium
 from shapely.geometry import Polygon, mapping
 import json
 from streamlit_folium import folium_static 
-import matplotlib.pyplot as plt, mpld3
 
 #from fun import state_style, style_function
 data = json.load(open("sample.json", encoding = "UTF-8"))
