@@ -63,7 +63,7 @@ data = json.load(open("sample.json", encoding = "UTF-8"))
 hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8"))
 
 m = folium.Map(location=[47, 20],zoom_start=7) 
-choropleth =folium.GeoJson(data= hu_shape.to_json(),style_function=style_function)
+choropleth =folium.GeoJson(data= hu_shape,style_function=style_function)
 folium.TileLayer('cartodbdark_matter',name="dark mode",control=True).add_to(m)
 
 #folium.TileLayer('cartodbdark_matter',name="dark mode",control=True).add_to(m)
