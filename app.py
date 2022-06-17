@@ -75,14 +75,15 @@ choropleth =folium.GeoJson(data= hu_shape,
                            style_function=style_function,
                            highlight_function=highlight_style)
 folium.TileLayer('cartodbdark_matter',name="dark mode",control=True).add_to(m)
-m.add_child(choropleth)
+
 
 folium.LayerControl().add_to(m)
 choropleth.add_child(folium.features.GeoJsonTooltip
                                 (fields=['NAME_1', "SZDSZ", "FIDESZ","MSZP","FKGP","MDF"],
                                 labels=True))
+m.add_child(choropleth)
 st.title("button map")
-m
+folium_static(m)
 
 
 #m = folium.Map(location=[47, 20],zoom_start=7) 
