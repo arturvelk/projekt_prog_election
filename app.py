@@ -4,9 +4,28 @@ import folium
 from shapely.geometry import Polygon, mapping
 import json
 from streamlit_folium import folium_static 
+import s3fs
+import os
+
+
+fs = s3fs.S3FileSystem(anon=False)
+
+#@st.experimental_memo(ttl=600)
+
+def read_file(filename):
+    with fs.open(filename) as f:
+        return f.read().decode("utf-8")
+
+def read_json(filename):
+    return json.loads(read_file(filename))
+    
+
+hu_shape = read_json("s3://election-sara-artur/hu_district.geojson")
+data = read_json("s3://election-sara-artur/sample.json")
+
 
 #from fun import state_style, style_function
-data = json.load(open("sample.json", encoding = "UTF-8"))
+#data = json.load(open("sample.json", encoding = "UTF-8"))
 
 def state_style(data, state,function=False):
     """
@@ -65,9 +84,11 @@ def highlight_style(feature):
          'weight': 1}
 
 
+
+
 st.write("My First Streamlit Web App, csicskavok")
 
-hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8"))
+#hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8"))
 
 #plot choropleth button map
 m = folium.Map(location=[47, 20],zoom_start=7)
