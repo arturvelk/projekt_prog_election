@@ -8,23 +8,29 @@ import s3fs
 import os
 
 
-fs = s3fs.S3FileSystem(anon=False)
+#fs = s3fs.S3FileSystem(anon=False)
 
 #@st.experimental_memo(ttl=600)
 
 def read_file(filename):
-    with fs.open(filename) as f:
+    with open(filename, ) as f:
         return f.read().decode("utf-8")
 
 def read_json(filename):
     return json.loads(read_file(filename))
     
+hu_shape_district = json.load(open("hu_distrcit.geojson", encoding="UTF-8"))
+hu_shape_jaras = json.load(open("hu_jaras.geojson", encoding="UTF-8"))
+    
+    
+#hu_shape = read_json("hu_distrcit.geojson")
+#data_district = read_json("sample.json")
 
-hu_shape = read_json("s3://election-sara-artur/hu_distrcit.geojson")
-data_district = read_json("s3://election-sara-artur/sample.json")
+data_district = json.load(open("sample.json", encoding="UTF-8"))
+data_jaras = json.load(open("sample_jaras.json", encoding="UTF-8"))
 
-hu_shape_jaras = read_json("s3://election-sara-artur/hu_jaras.geojson")
-data_jaras = read_json("s3://election-sara-artur/sample_jaras.json")
+#hu_shape_jaras = read_json("hu_jaras.geojson")
+#data_jaras = read_json("sample_jaras.json")
 
 
 #from fun import state_style, style_function
@@ -101,24 +107,32 @@ def highlight_style(feature):
 
 st.write("My First Streamlit Web App, csicskavok, csicska")
 
-add_select = st.sidebar.selectbox("What data do you want to see?",("Megyek", "Jarasok"))
+select_data = st.sidebar.selectbox("What data do you want to see?",("Megyek", "Jarasok"))
+
+dicts = {"Megyek":{"data" : hu_shape_district, "style": style_function_district, "handler" : "NAME_1"},
+         "Jarasok":{"data" : hu_shape_jaras, "style": style_function_jaras, "handler":"name"}}
 
 #hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8")) asd
-
+st.write(select_data)
 #plot choropleth button map
-m = folium.Map(location=[47, 20],zoom_start=7,tiles=add_select)
-choropleth =folium.GeoJson(data= hu_shape_jaras#jarasok vagy megyek,
-                           style_function=style_function_jaras#jarasok vagy megyék,
-                           highlight_function=highlight_style).add_to(m).add_child(folium.features.GeoJsonTooltip
-                                (fields=['name' ,"SZDSZ", "FIDESZ","MSZP","FKGP","MDF"],
-                                labels=True))
-folium.TileLayer('cartodbdark_matter',name="dark mode",control=True).add_to(m)
+def show_maps(data, style,handler):
+    m = folium.Map(location=[47, 20],zoom_start=7)
 
-m.add_child(choropleth)
+    choropleth =folium.GeoJson(data= data,#jarasok vagy megyek,
+                               style_function=style,#jarasok vagy megyék,
+                               highlight_function=highlight_style).add_to(m).add_child(folium.features.GeoJsonTooltip
+                                    (fields=[handler] ,#"SZDSZ", "FIDESZ","MSZP","FKGP","MDF"],
+                                    labels=True))
 
-folium.LayerControl().add_to(m)
-folium_static(m)
 
+    folium.TileLayer('cartodbdark_matter',name="dark mode",control=True).add_to(m)
+
+    m.add_child(choropleth)
+
+    folium.LayerControl().add_to(m)
+    folium_static(m)
+
+show_maps(**dicts[select_data])
 
 #m = folium.Map(location=[47, 20],zoom_start=7) 
 #choropleth =folium.GeoJson(data= hu_shape,style_function=style_function)
