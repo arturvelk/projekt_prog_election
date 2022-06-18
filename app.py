@@ -21,9 +21,10 @@ def read_json(filename):
     
 
 hu_shape = read_json("s3://election-sara-artur/hu_distrcit.geojson")
-data = read_json("s3://election-sara-artur/sample.json")
+data_district = read_json("s3://election-sara-artur/sample.json")
 
-
+hu_shape_jaras = read_json("s3://election-sara-artur/hu_jaras.geojson")
+data_jaras = read_json("s3://election-sara-artur/sample_jaras.json")
 
 
 #from fun import state_style, style_function
@@ -66,13 +67,23 @@ def state_style(data, state,function=False):
   
     return state_style
 
-def style_function(feature):
+def style_function_district(feature):
     """
     style_function used by the GeoJson folium function
     """
 
     state = feature['properties']['NAME_1']
-    style = state_style(data,state,function=True)
+    style = state_style(data_district,state,function=True)
+    
+    return style
+
+def style_function_jaras(feature):
+    """
+    style_function used by the GeoJson folium function
+    """
+
+    state = feature['properties']['name']
+    style = state_style(data_jaras,state,function=True)
     
     return style
 
@@ -94,8 +105,8 @@ st.write("My First Streamlit Web App, csicskavok")
 
 #plot choropleth button map
 m = folium.Map(location=[47, 20],zoom_start=7)
-choropleth =folium.GeoJson(data= hu_shape,
-                           style_function=style_function,
+choropleth =folium.GeoJson(data= hu_shape_jaras,
+                           style_function=style_function_jaras,
                            highlight_function=highlight_style).add_to(m).add_child(folium.features.GeoJsonTooltip
                                 (fields=['NAME_1' ,"SZDSZ", "FIDESZ","MSZP","FKGP","MDF"],
                                 labels=True))
