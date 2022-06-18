@@ -101,12 +101,14 @@ def highlight_style(feature):
 
 st.write("My First Streamlit Web App, csicskavok, csicska")
 
+add_select = st.sidebar.selectbox("What data do you want to see?",("Megyek", "Jarasok"))
+
 #hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8")) asd
 
 #plot choropleth button map
-m = folium.Map(location=[47, 20],zoom_start=7)
-choropleth =folium.GeoJson(data= hu_shape_jaras,
-                           style_function=style_function_jaras,
+m = folium.Map(location=[47, 20],zoom_start=7,tiles=add_select)
+choropleth =folium.GeoJson(data= hu_shape_jaras#jarasok vagy megyek,
+                           style_function=style_function_jaras#jarasok vagy megyék,
                            highlight_function=highlight_style).add_to(m).add_child(folium.features.GeoJsonTooltip
                                 (fields=['name' ,"SZDSZ", "FIDESZ","MSZP","FKGP","MDF"],
                                 labels=True))
