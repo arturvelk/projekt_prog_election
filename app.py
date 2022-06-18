@@ -20,8 +20,8 @@ def read_json(filename):
     return json.loads(read_file(filename))
     
 
-hu_shape = read_json("s3://election-sara-artur/hu_district.geojson")
-data = read_json("s3://election-sara-artur/sample.json")
+hu_shape = read_json("election-sara-artur/hu_district.geojson")
+data = read_json("election-sara-artur/sample.json")
 
 
 #from fun import state_style, style_function
