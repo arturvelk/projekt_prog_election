@@ -101,7 +101,7 @@ def highlight_style(feature):
 
 st.write("My First Streamlit Web App, csicskavok, csicska")
 
-#hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8"))
+#hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8")) asd
 
 #plot choropleth button map
 m = folium.Map(location=[47, 20],zoom_start=7)
