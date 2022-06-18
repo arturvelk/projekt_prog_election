@@ -99,7 +99,7 @@ def highlight_style(feature):
 
 
 
-st.write("My First Streamlit Web App, csicskavok")
+st.write("My First Streamlit Web App, csicskavok, csicska")
 
 #hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8"))
 
