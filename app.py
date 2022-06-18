@@ -112,7 +112,7 @@ def show_maps(data, style,handler):
     choropleth =folium.GeoJson(data= data,#jarasok vagy megyek,
                                style_function=style,#jarasok vagy megyék,
                                highlight_function=highlight_style).add_to(m).add_child(folium.features.GeoJsonTooltip
-                                    (fields=[handler] ,#"SZDSZ", "FIDESZ","MSZP","FKGP","MDF"],
+                                    (fields=[handler ,"SZDSZ", "FIDESZ","MSZP","FKGP","MDF"],
                                     labels=True))
 
 
