@@ -8,33 +8,24 @@ import s3fs
 import os
 
 
-#fs = s3fs.S3FileSystem(anon=False)
+fs = s3fs.S3FileSystem(anon=False)
 
 #@st.experimental_memo(ttl=600)
 
 def read_file(filename):
-    with open(filename, ) as f:
+    with fs.open(filename) as f:
         return f.read().decode("utf-8")
 
 def read_json(filename):
     return json.loads(read_file(filename))
     
-hu_shape_district = json.load(open("hu_distrcit.geojson", encoding="UTF-8"))
-hu_shape_jaras = json.load(open("hu_jaras.geojson", encoding="UTF-8"))
-    
-    
-#hu_shape = read_json("hu_distrcit.geojson")
-#data_district = read_json("sample.json")
 
-data_district = json.load(open("sample.json", encoding="UTF-8"))
-data_jaras = json.load(open("sample_jaras.json", encoding="UTF-8"))
+hu_shape_district = read_json("s3://election-sara-artur/hu_distrcit.geojson")
+data_district = read_json("s3://election-sara-artur/sample.json")
 
-#hu_shape_jaras = read_json("hu_jaras.geojson")
-#data_jaras = read_json("sample_jaras.json")
+hu_shape_jaras = read_json("s3://election-sara-artur/hu_jaras.geojson")
+data_jaras = read_json("s3://election-sara-artur/sample_jaras.json")
 
-
-#from fun import state_style, style_function
-#data = json.load(open("sample.json", encoding = "UTF-8"))
 
 def state_style(data, state,function=False):
     """
