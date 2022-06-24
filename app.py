@@ -21,6 +21,7 @@ def read_file(filename):
 def read_json(filename):
     return json.loads(read_file(filename))
 
+
 district_90 = read_json("s3://election-sara-artur/hu_distrcit_90.geojson")
 district_94 = read_json("s3://election-sara-artur/hu_distrcit_94.geojson")
 district_98 = read_json("s3://election-sara-artur/hu_distrcit_98.geojson")
@@ -59,9 +60,6 @@ data_jaras_14 = read_json("s3://election-sara-artur/val_14_jaras.json")
 data_jaras_18 = read_json("s3://election-sara-artur/val_18_jaras.json")
 
 
-hu_shape_jaras = read_json("s3://election-sara-artur/hu_jaras_90.geojson")
-data_jaras = read_json("s3://election-sara-artur/val_90_jaras.json")
-
 hu_shape_budapest = read_json("s3://election-sara-artur/hu_budapesz.geojson")
 data_kerulet = read_json("s3://election-sara-artur/val_90_kerület.json")
 
@@ -78,28 +76,128 @@ select_year = st.sidebar.select_slider(
 )
 
 dicts_year = {
-    "1990": {"Megye" :[district_90,style_function_90], "Járás" : [jaras_90, style_function_jaras_90]},
-    "1994": {"Megye" :[district_94,style_function_94],"Járás" : [jaras_94, style_function_jaras_94]},
-    "1998": {"Megye" :[district_98,style_function_98],"Járás" : [jaras_98, style_function_jaras_98]},
-    "2002": {"Megye" :[district_02,style_function_02],"Járás" : [jaras_02, style_function_jaras_02]},
-    "2006": {"Megye" :[district_06,style_function_06],"Járás" : [jaras_06, style_function_jaras_06]},
-    "2010": {"Megye" :[district_10,style_function_10],"Járás" : [jaras_10, style_function_jaras_10]},
-    "2014": {"Megye" :[district_14,style_function_14],"Járás" : [jaras_14, style_function_jaras_14]},
-    "2018": {"Megye" :[district_18,style_function_18],"Járás" : [jaras_18, style_function_jaras_18]}
+    "1990": {
+        "Megye": [
+            district_90,
+            style_function_90,
+            ["MDF", "SZDSZ", "MSZP", "FIDESZ", "FKGP"],
+        ],
+        "Járás": [
+            jaras_90,
+            style_function_jaras_90,
+            ["MDF", "SZDSZ", "MSZP", "FIDESZ", "FKGP"],
+        ],
+    },
+    "1994": {
+        "Megye": [
+            district_94,
+            style_function_94,
+            ["MSZP", "SZDSZ", "MDF", "FKGP", "FIDESZ"],
+        ],
+        "Járás": [
+            jaras_94,
+            style_function_jaras_94,
+            ["MSZP", "SZDSZ", "MDF", "FKGP", "FIDESZ"],
+        ],
+    },
+    "1998": {
+        "Megye": [
+            district_98,
+            style_function_98,
+            ["MSZP", "FIDESZ", "FKGP", "SZDSZ", "MIÉP"],
+        ],
+        "Járás": [
+            jaras_98,
+            style_function_jaras_98,
+            ["MSZP", "FIDESZ", "FKGP", "SZDSZ", "MIÉP"],
+        ],
+    },
+    "2002": {
+        "Megye": [
+            district_02,
+            style_function_02,
+            ["MSZP", "FIDESZ", "FKGP", "MIÉP", "SZDSZ"],
+        ],
+        "Járás": [
+            jaras_02,
+            style_function_jaras_02,
+            ["MSZP", "FIDESZ", "FKGP", "MIÉP", "SZDSZ"],
+        ],
+    },
+    "2006": {
+        "Megye": [
+            district_06,
+            style_function_06,
+            ["MSZP", "FIDESZ-MDF", "SZDSZ", "MIÉP", "CENTRUM"],
+        ],
+        "Járás": [
+            jaras_06,
+            style_function_jaras_06,
+            ["MSZP", "FIDESZ-MDF", "SZDSZ", "MIÉP", "CENTRUM"],
+        ],
+    },
+    "2010": {
+        "Megye": [
+            district_10,
+            style_function_10,
+            ["MSZP", "FIDESZ-KDNP", "SZDSZ", "MDF", "MIÉP-JOBBIK"],
+        ],
+        "Járás": [
+            jaras_10,
+            style_function_jaras_10,
+            ["MSZP", "FIDESZ-KDNP", "SZDSZ", "MDF", "MIÉP-JOBBIK"],
+        ],
+    },
+    "2014": {
+        "Megye": [
+            district_14,
+            style_function_14,
+            [
+                "FIDESZ-KDNP",
+                "MSZP-EGYÜTT-DK-PM-MLP",
+                "JOBBIK",
+                "LMP",
+                "A HAZA NEM ELADÓ",
+            ],
+        ],
+        "Járás": [
+            jaras_14,
+            style_function_jaras_14,
+            [
+                "FIDESZ-KDNP",
+                "MSZP-EGYÜTT-DK-PM-MLP",
+                "JOBBIK",
+                "LMP",
+                "A HAZA NEM ELADÓ",
+            ],
+        ],
+    },
+    "2018": {
+        "Megye": [
+            district_18,
+            style_function_18,
+            ["FIDESZ-KDNP", "JOBBIK", "MSZP-PM", "LMP", "DK"],
+        ],
+        "Járás": [
+            jaras_18,
+            style_function_jaras_18,
+            ["FIDESZ-KDNP", "JOBBIK", "MSZP-PM", "LMP", "DK"],
+        ],
+    },
 }
 
 dicts = {
     "Megyek": {
         "data": dicts_year[select_year]["Megye"][0],
         "style": dicts_year[select_year]["Megye"][1],
-        "handler": "NAME_1",
+        "handler": ["NAME_1"] + dicts_year[select_year]["Megye"][2],
         "helyzet": [47, 20],
         "zoom": 7,
     },
     "Jarasok": {
         "data": dicts_year[select_year]["Járás"][0],
         "style": dicts_year[select_year]["Járás"][1],
-        "handler": "name",
+        "handler": ["name"] + + dicts_year[select_year]["Járás"][2],
         "helyzet": [47, 20],
         "zoom": 7,
     },
@@ -127,7 +225,7 @@ def show_maps(data, style, handler, helyzet, zoom):
         .add_to(m)
         .add_child(
             folium.features.GeoJsonTooltip(
-                fields=[handler, "SZDSZ", "FIDESZ", "MSZP", "FKGP", "MDF"], labels=True
+                fields=handler, labels=True
             )
         )
     )
