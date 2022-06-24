@@ -112,15 +112,15 @@ st.write("My First Streamlit Web App, csicskavok, csicska")
 
 select_data = st.sidebar.selectbox("What data do you want to see?",("Megyek", "Jarasok", "Budapest"))
 
-dicts = {"Megyek":{"data" : hu_shape_district, "style": style_function_district, "handler" : "NAME_1"},
-         "Jarasok":{"data" : hu_shape_jaras, "style": style_function_jaras, "handler":"name"},
-         "Budaőest":{"data" : hu_shape_budapest, "style": style_function_kerulet, "handler":"name"}}
+dicts = {"Megyek":{"data" : hu_shape_district, "style": style_function_district, "handler" : "NAME_1","helyzet" : [47,20], "zoom" : 11},
+         "Jarasok":{"data" : hu_shape_jaras, "style": style_function_jaras, "handler":"name", "helyzet" : [47,20], "zoom" : 11},
+         "Budapest":{"data" : hu_shape_budapest, "style": style_function_kerulet, "handler":"name", "helyzet" : [47.5, 19.1], "zoom" : 11}}
 
 #hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8")) asd
 st.write(select_data)
 #plot choropleth button map
-def show_maps(data, style,handler):
-    m = folium.Map(location=[47, 20],zoom_start=7)
+def show_maps(data, style,handler, helyzet, zoom):
+    m = folium.Map(location=helyzet,zoom_start=zoom)
 
     choropleth =folium.GeoJson(data= data,#jarasok vagy megyek,
                                style_function=style,#jarasok vagy megyék,
