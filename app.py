@@ -79,7 +79,7 @@ dicts_year = {
     "1990": {
         "Megye": [
             district_90,
-            style_function_megye_90,
+            style_function_90,
             ["MDF", "SZDSZ", "MSZP", "FIDESZ", "FKGP"],
         ],
         "Járás": [
@@ -197,7 +197,7 @@ dicts = {
     "Jarasok": {
         "data": dicts_year[select_year]["Járás"][0],
         "style": dicts_year[select_year]["Járás"][1],
-        "handler": ["name"] + dicts_year[select_year]["Járás"][2],
+        "handler": ["name"] + + dicts_year[select_year]["Járás"][2],
         "helyzet": [47, 20],
         "zoom": 7,
     },
