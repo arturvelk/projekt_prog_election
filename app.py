@@ -26,6 +26,8 @@ data_district = read_json("s3://election-sara-artur/sample.json")
 hu_shape_jaras = read_json("s3://election-sara-artur/hu_jaras.geojson")
 data_jaras = read_json("s3://election-sara-artur/sample_jaras.json")
 
+hu_shape_budapest = read_json("s3://election-sara-artur/hu_budapesz.geojson")
+data_kerulet = read_json("s3://election-sara-artur/val_90_kerület.json")
 
 def state_style(data, state,function=False):
     """
@@ -84,6 +86,16 @@ def style_function_jaras(feature):
     
     return style
 
+def style_function_kerulet(feature):
+    """
+    style_function used by the GeoJson folium function
+    """
+
+    state = feature['properties']['name']
+    style = state_style(data_kerulet,state,function=True)
+    
+    return style
+
 
 def highlight_style(feature): 
     """
@@ -98,10 +110,11 @@ def highlight_style(feature):
 
 st.write("My First Streamlit Web App, csicskavok, csicska")
 
-select_data = st.sidebar.selectbox("What data do you want to see?",("Megyek", "Jarasok"))
+select_data = st.sidebar.selectbox("What data do you want to see?",("Megyek", "Jarasok", "Budapest"))
 
 dicts = {"Megyek":{"data" : hu_shape_district, "style": style_function_district, "handler" : "NAME_1"},
-         "Jarasok":{"data" : hu_shape_jaras, "style": style_function_jaras, "handler":"name"}}
+         "Jarasok":{"data" : hu_shape_jaras, "style": style_function_jaras, "handler":"name"},
+         "Budaőest":{"data" : hu_shape_budapest, "style": style_function_kerulet, "handler":"name"}}
 
 #hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8")) asd
 st.write(select_data)
