@@ -30,6 +30,16 @@ district_10 = read_json("s3://election-sara-artur/hu_distrcit_10.geojson")
 district_14 = read_json("s3://election-sara-artur/hu_distrcit_14.geojson")
 district_18 = read_json("s3://election-sara-artur/hu_distrcit_18.geojson")
 
+jaras_90 = read_json("s3://election-sara-artur/hu_jaras_90.geojson")
+jaras_94 = read_json("s3://election-sara-artur/hu_jaras_94.geojson")
+jaras_98 = read_json("s3://election-sara-artur/hu_jaras_98.geojson")
+jaras_02 = read_json("s3://election-sara-artur/hu_jaras_02.geojson")
+jaras_06 = read_json("s3://election-sara-artur/hu_jaras_06.geojson")
+jaras_10 = read_json("s3://election-sara-artur/hu_jaras_10.geojson")
+jaras_14 = read_json("s3://election-sara-artur/hu_jaras_14.geojson")
+jaras_18 = read_json("s3://election-sara-artur/hu_jaras_18.geojson")
+
+
 data_district_90 = read_json("s3://election-sara-artur/val_90_megye.json")
 data_district_94 = read_json("s3://election-sara-artur/val_94_megye.json")
 data_district_98 = read_json("s3://election-sara-artur/val_98_megye.json")
@@ -38,6 +48,15 @@ data_district_06 = read_json("s3://election-sara-artur/val_06_megye.json")
 data_district_10 = read_json("s3://election-sara-artur/val_10_megye.json")
 data_district_14 = read_json("s3://election-sara-artur/val_14_megye.json")
 data_district_18 = read_json("s3://election-sara-artur/val_18_megye.json")
+
+data_jaras_90 = read_json("s3://election-sara-artur/val_90_jaras.json")
+data_jaras_94 = read_json("s3://election-sara-artur/val_94_jaras.json")
+data_jaras_98 = read_json("s3://election-sara-artur/val_98_jaras.json")
+data_jaras_02 = read_json("s3://election-sara-artur/val_02_jaras.json")
+data_jaras_06 = read_json("s3://election-sara-artur/val_06_jaras.json")
+data_jaras_10 = read_json("s3://election-sara-artur/val_10_jaras.json")
+data_jaras_14 = read_json("s3://election-sara-artur/val_14_jaras.json")
+data_jaras_18 = read_json("s3://election-sara-artur/val_18_jaras.json")
 
 
 hu_shape_jaras = read_json("s3://election-sara-artur/hu_jaras_90.geojson")
@@ -59,27 +78,27 @@ select_year = st.sidebar.select_slider(
 )
 
 dicts_year = {
-    "1990": [district_90,style_function_90],
-    "1994": [district_94,style_function_94],
-    "1998": [district_98,style_function_98],
-    "2002": [district_02,style_function_02],
-    "2006": [district_06,style_function_06],
-    "2010": [district_10,style_function_10],
-    "2014": [district_14,style_function_14],
-    "2018": [district_18,style_function_18],
+    "1990": [district_90,jaras_90,style_function_90],
+    "1994": [district_94,jaras_94,style_function_94],
+    "1998": [district_98,jaras_98,style_function_98],
+    "2002": [district_02,jaras_02,style_function_02],
+    "2006": [district_06,jaras_06,style_function_06],
+    "2010": [district_10,jaras_10,style_function_10],
+    "2014": [district_14,jaras_14,style_function_14],
+    "2018": [district_18,jaras_18,style_function_18],
 }
 
 dicts = {
     "Megyek": {
         "data": dicts_year[select_year][0],
-        "style": dicts_year[select_year][1],
+        "style": dicts_year[select_year][2],
         "handler": "NAME_1",
         "helyzet": [47, 20],
         "zoom": 7,
     },
     "Jarasok": {
-        "data": hu_shape_jaras,
-        "style": style_function_jaras,
+        "data": dicts_year[select_year][1],
+        "style": dicts_year[select_year][2],
         "handler": "name",
         "helyzet": [47, 20],
         "zoom": 7,

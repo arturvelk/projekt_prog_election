@@ -18,14 +18,6 @@ def read_file(filename):
 def read_json(filename):
     return json.loads(read_file(filename))
 
-district_90 = read_json("s3://election-sara-artur/hu_distrcit_90.geojson")
-district_94 = read_json("s3://election-sara-artur/hu_distrcit_94.geojson")
-district_98 = read_json("s3://election-sara-artur/hu_distrcit_98.geojson")
-district_02 = read_json("s3://election-sara-artur/hu_distrcit_02.geojson")
-district_06 = read_json("s3://election-sara-artur/hu_distrcit_06.geojson")
-district_10 = read_json("s3://election-sara-artur/hu_distrcit_10.geojson")
-district_14 = read_json("s3://election-sara-artur/hu_distrcit_14.geojson")
-district_18 = read_json("s3://election-sara-artur/hu_distrcit_18.geojson")
 
 data_district_90 = read_json("s3://election-sara-artur/val_90_megye.json")
 data_district_94 = read_json("s3://election-sara-artur/val_94_megye.json")
@@ -35,6 +27,16 @@ data_district_06 = read_json("s3://election-sara-artur/val_06_megye.json")
 data_district_10 = read_json("s3://election-sara-artur/val_10_megye.json")
 data_district_14 = read_json("s3://election-sara-artur/val_14_megye.json")
 data_district_18 = read_json("s3://election-sara-artur/val_18_megye.json")
+
+
+data_jaras_90 = read_json("s3://election-sara-artur/val_90_jaras.json")
+data_jaras_94 = read_json("s3://election-sara-artur/val_94_jaras.json")
+data_jaras_98 = read_json("s3://election-sara-artur/val_98_jaras.json")
+data_jaras_02 = read_json("s3://election-sara-artur/val_02_jaras.json")
+data_jaras_06 = read_json("s3://election-sara-artur/val_06_jaras.json")
+data_jaras_10 = read_json("s3://election-sara-artur/val_10_jaras.json")
+data_jaras_14 = read_json("s3://election-sara-artur/val_14_jaras.json")
+data_jaras_18 = read_json("s3://election-sara-artur/val_18_jaras.json")
 
 data_district = read_json("s3://election-sara-artur/val_90_megye.json")
 
@@ -458,6 +460,423 @@ def style_function_jaras(feature):
     
     return style
 #sa
+
+def state_style_90_jaras(state,function=False):
+    """
+    Returns the style for a state in a given year
+    """
+    
+    state_result = data_jaras_90[state]
+    
+    #Set state colour
+    if not state_result:
+        color = "#000000"
+    elif max(state_result, key=state_result.get) == "SZDSZ":
+        color =  "#0783c7"#blue
+    elif max(state_result, key=state_result.get) == "FKGP":
+        color = "#445f2b"
+    elif max(state_result, key=state_result.get) == "MDF":
+        color = "#3c8a5a"
+    elif max(state_result, key=state_result.get) == "MSZP":
+        color = '#e71a29' #red
+    elif max(state_result, key=state_result.get) == "FIDESZ":
+        color = "#fd8100"
+        
+    
+    #Set state style
+    if function == False:
+        # Format for style_dictionary
+        state_style = {
+            'opacity': 0.8,
+            'color': color,
+            "highlight" : True
+        } 
+    else:
+        # Format for style_function
+        state_style = {
+             'fillOpacity': 0.8,
+             'weight': 1,
+             'fillColor': color,
+             'color': '#000000',
+             "highlight" : True}    
+  
+    return state_style
+
+def style_function_jaras_90(feature):
+    """
+    style_function used by the GeoJson folium function
+    """
+
+    state = feature['properties']['name']
+    style = state_style_90_jaras(state,function=True)
+    
+    return style
+
+
+def state_style_94_jaras(state,function=False):
+    """
+    Returns the style for a state in a given year
+    """
+    
+    state_result = data_jaras_94[state]
+    
+    #Set state colour
+    if not state_result:
+        color = "#000000"
+    elif max(state_result, key=state_result.get) == "SZDSZ":
+        color =  "#0783c7"#blue
+    elif max(state_result, key=state_result.get) == "MSZP":
+        color =  "#E71A29"  
+    elif max(state_result, key=state_result.get) == "MDF":
+        color = "#3C8A5A"
+    elif max(state_result, key=state_result.get) == "FKGP":
+        color = "#445F2B" #red
+    elif max(state_result, key=state_result.get) == "FIDESZ":
+        color = "#fd8100"
+        
+    
+    #Set state style
+    if function == False:
+        # Format for style_dictionary
+        state_style = {
+            'opacity': 0.8,
+            'color': color,
+            "highlight" : True
+        } 
+    else:
+        # Format for style_function
+        state_style = {
+             'fillOpacity': 0.8,
+             'weight': 1,
+             'fillColor': color,
+             'color': '#000000',
+             "highlight" : True}    
+  
+    return state_style
+
+def style_function_jaras_94(feature):
+    """
+    style_function used by the GeoJson folium function
+    """
+
+    state = feature['properties']['name']
+    style = state_style_94_jaras(state,function=True)
+    
+    return style
+
+def state_style_98_jaras(state,function=False):
+    """
+    Returns the style for a state in a given year
+    """
+    
+    state_result = data_jaras_98[state]
+    
+    #Set state colour
+    if not state_result:
+        color = "#000000"
+    elif max(state_result, key=state_result.get) == "SZDSZ":
+        color =  "#0783c7"#blue
+    elif max(state_result, key=state_result.get) == "FKGP":
+        color = "#445f2b"
+    elif max(state_result, key=state_result.get) == "MIÉP":
+        color = "#9E863E"
+    elif max(state_result, key=state_result.get) == "MSZP":
+        color = '#e71a29' #red
+    elif max(state_result, key=state_result.get) == "FIDESZ":
+        color = "#fd8100"
+        
+    
+    #Set state style
+    if function == False:
+        # Format for style_dictionary
+        state_style = {
+            'opacity': 0.8,
+            'color': color,
+            "highlight" : True
+        } 
+    else:
+        # Format for style_function
+        state_style = {
+             'fillOpacity': 0.8,
+             'weight': 1,
+             'fillColor': color,
+             'color': '#000000',
+             "highlight" : True}    
+  
+    return state_style
+
+def style_function_jaras_98(feature):
+    """
+    style_function used by the GeoJson folium function
+    """
+
+    state = feature['properties']['name']
+    style = state_style_98_jaras(state,function=True)
+    
+    return style
+
+def state_style_02_jaras(state,function=False):
+    """
+    Returns the style for a state in a given year
+    """
+    
+    state_result = data_jaras_02[state]
+    
+    #Set state colour
+    if not state_result:
+        color = "#000000"
+    elif max(state_result, key=state_result.get) == "SZDSZ":
+        color =  "#0783c7"#blue
+    elif max(state_result, key=state_result.get) == "CENTRUM":
+        color = "#c6adb3"
+    elif max(state_result, key=state_result.get) == "MIÉP":
+        color = "#9E863E"
+    elif max(state_result, key=state_result.get) == "MSZP":
+        color = '#e71a29' #red
+    elif max(state_result, key=state_result.get) == "FIDESZ-MDF":
+        color = "#fd8100"
+        
+    
+    #Set state style
+    if function == False:
+        # Format for style_dictionary
+        state_style = {
+            'opacity': 0.8,
+            'color': color,
+            "highlight" : True
+        } 
+    else:
+        # Format for style_function
+        state_style = {
+             'fillOpacity': 0.8,
+             'weight': 1,
+             'fillColor': color,
+             'color': '#000000',
+             "highlight" : True}    
+  
+    return state_style
+
+def style_function_jaras_02(feature):
+    """
+    style_function used by the GeoJson folium function
+    """
+
+    state = feature['properties']['name']
+    style = state_style_02_jaras(state,function=True)
+    
+    return style
+
+def state_style_06_jaras(state,function=False):
+    """
+    Returns the style for a state in a given year
+    """
+    
+    state_result = data_jaras_06[state]
+    
+    #Set state colour
+    if not state_result:
+        color = "#000000"
+    elif max(state_result, key=state_result.get) == "SZDSZ":
+        color =  "#0783c7"#blue
+    elif max(state_result, key=state_result.get) == "MDF":
+        color = "#3C8A5A"
+    elif max(state_result, key=state_result.get) == "MIÉP-JOBBIK":
+        color = "#9E863E"
+    elif max(state_result, key=state_result.get) == "MSZP":
+        color = '#e71a29' #red
+    elif max(state_result, key=state_result.get) == "FIDESZ-KDNP":
+        color = "#fd8100"
+        
+    
+    #Set state style
+    if function == False:
+        # Format for style_dictionary
+        state_style = {
+            'opacity': 0.8,
+            'color': color,
+            "highlight" : True
+        } 
+    else:
+        # Format for style_function
+        state_style = {
+             'fillOpacity': 0.8,
+             'weight': 1,
+             'fillColor': color,
+             'color': '#000000',
+             "highlight" : True}    
+  
+    return state_style
+
+def style_function_jaras_06(feature):
+    """
+    style_function used by the GeoJson folium function
+    """
+
+    state = feature['properties']['name']
+    style = state_style_06_jaras(state,function=True)
+    
+    return style
+
+def state_style_10_jaras(state,function=False):
+    """
+    Returns the style for a state in a given year
+    """
+    
+    state_result = data_jaras_10[state]
+    
+    #Set state colour
+    if not state_result:
+        color = "#000000"
+    elif max(state_result, key=state_result.get) == "LMP":
+        color =  "#73c92d"#blue
+    elif max(state_result, key=state_result.get) == "MDF":
+        color = "#3C8A5A"
+    elif max(state_result, key=state_result.get) == "JOBBIK":
+        color = "#008371"
+    elif max(state_result, key=state_result.get) == "MSZP":
+        color = '#e71a29' #red
+    elif max(state_result, key=state_result.get) == "FIDESZ-KDNP":
+        color = "#fd8100"
+        
+    
+    #Set state style
+    if function == False:
+        # Format for style_dictionary
+        state_style = {
+            'opacity': 0.8,
+            'color': color,
+            "highlight" : True
+        } 
+    else:
+        # Format for style_function
+        state_style = {
+             'fillOpacity': 0.8,
+             'weight': 1,
+             'fillColor': color,
+             'color': '#000000',
+             "highlight" : True}    
+  
+    return state_style
+
+def style_function_jaras_10(feature):
+    """
+    style_function used by the GeoJson folium function
+    """
+
+    state = feature['properties']['name']
+    style = state_style_10_jaras(state,function=True)
+    
+    return style
+
+
+def state_style_14_jaras(state,function=False):
+    """
+    Returns the style for a state in a given year
+    """
+    
+    state_result = data_jaras_14[state]
+    
+    #Set state colour
+    if not state_result:
+        color = "#000000"
+    elif max(state_result, key=state_result.get) == "LMP":
+        color =  "#73c92d"#blue
+    elif max(state_result, key=state_result.get) == "A HAZA NEM ELADÓ":
+        color = "#BF3F3F"
+    elif max(state_result, key=state_result.get) == "JOBBIK":
+        color = "#008371"
+    elif max(state_result, key=state_result.get) == "MSZP-EGYÜTT-DK-PM-MLP":
+        color = '#e71a29' #red
+    elif max(state_result, key=state_result.get) == "FIDESZ-KDNP":
+        color = "#fd8100"
+        
+    
+    #Set state style
+    if function == False:
+        # Format for style_dictionary
+        state_style = {
+            'opacity': 0.8,
+            'color': color,
+            "highlight" : True
+        } 
+    else:
+        # Format for style_function
+        state_style = {
+             'fillOpacity': 0.8,
+             'weight': 1,
+             'fillColor': color,
+             'color': '#000000',
+             "highlight" : True}    
+  
+    return state_style
+
+def style_function(feature):
+    """
+    style_function used by the GeoJson folium function
+    """
+
+    state = feature['properties']['name']
+    style = state_style_14_jaras(state,function=True)
+    
+    return style
+
+
+
+def state_style_18_jaras(state,function=False):
+    """
+    Returns the style for a state in a given year
+    """
+    
+    state_result = data_jaras_18[state]
+    
+    #Set state colour
+    if not state_result:
+        color = "#000000"
+    elif max(state_result, key=state_result.get) == "LMP":
+        color =  "#73c92d"#blue
+    elif max(state_result, key=state_result.get) == "DK":
+        color = "#007FFF"
+    elif max(state_result, key=state_result.get) == "JOBBIK":
+        color = "#008371"
+    elif max(state_result, key=state_result.get) == "MSZP-PM":
+        color = '#e71a29' #red
+    elif max(state_result, key=state_result.get) == "FIDESZ-KDNP":
+        color = "#fd8100"
+        
+    
+    #Set state style
+    if function == False:
+        # Format for style_dictionary
+        state_style = {
+            'opacity': 0.8,
+            'color': color,
+            "highlight" : True
+        } 
+    else:
+        # Format for style_function
+        state_style = {
+             'fillOpacity': 0.8,
+             'weight': 1,
+             'fillColor': color,
+             'color': '#000000',
+             "highlight" : True}    
+  
+    return state_style
+
+def style_function(feature):
+    """
+    style_function used by the GeoJson folium function
+    """
+
+    state = feature['properties']['name']
+    style = state_style_18_jaras(state,function=True)
+    
+    return style
+
+
+
+
+## ez itt pest
 def style_function_kerulet(feature):
     """
     style_function used by the GeoJson folium function
