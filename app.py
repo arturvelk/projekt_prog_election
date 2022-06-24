@@ -116,7 +116,7 @@ select_data = st.sidebar.selectbox("What data do you want to see?",("Megyek", "J
 
 dicts = {"Megyek":{"data" : hu_shape_district, "style": style_function_district, "handler" : "NAME_1","helyzet" : [47,20], "zoom" : 7},
          "Jarasok":{"data" : hu_shape_jaras, "style": style_function_jaras, "handler":"name", "helyzet" : [47,20], "zoom" : 7},
-         "Budapest":{"data" : hu_shape_budapest, "style": style_function_kerulet, "handler":"name", "helyzet" : [47.5, 19.1], "zoom" : 10.7}}
+         "Budapest":{"data" : hu_shape_budapest, "style": style_function_kerulet, "handler":"name", "helyzet" : [47.5, 19.1], "zoom" : 10}}
 
 #hu_shape = json.load(open('hu_distrcit.geojson', encoding = "UTF-8")) asd
 st.write(select_data)
