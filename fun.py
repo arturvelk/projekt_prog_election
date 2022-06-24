@@ -810,7 +810,7 @@ def state_style_14_jaras(state,function=False):
   
     return state_style
 
-def style_function(feature):
+def style_function_jaras_14(feature):
     """
     style_function used by the GeoJson folium function
     """
@@ -863,7 +863,7 @@ def state_style_18_jaras(state,function=False):
   
     return state_style
 
-def style_function(feature):
+def style_function_jaras_18(feature):
     """
     style_function used by the GeoJson folium function
     """

@@ -78,27 +78,27 @@ select_year = st.sidebar.select_slider(
 )
 
 dicts_year = {
-    "1990": [district_90,jaras_90,style_function_90],
-    "1994": [district_94,jaras_94,style_function_94],
-    "1998": [district_98,jaras_98,style_function_98],
-    "2002": [district_02,jaras_02,style_function_02],
-    "2006": [district_06,jaras_06,style_function_06],
-    "2010": [district_10,jaras_10,style_function_10],
-    "2014": [district_14,jaras_14,style_function_14],
-    "2018": [district_18,jaras_18,style_function_18],
+    "1990": {"Megye" :[district_90,style_function_90], "Járás" : [jaras_90, style_function_jaras_90]},
+    "1994": {"Megye" :[district_94,style_function_94],"Járás" : [jaras_94, style_function_jaras_94]},
+    "1998": {"Megye" :[district_98,style_function_98],"Járás" : [jaras_98, style_function_jaras_98]},
+    "2002": {"Megye" :[district_02,style_function_02],"Járás" : [jaras_02, style_function_jaras_02]},
+    "2006": {"Megye" :[district_06,style_function_06],"Járás" : [jaras_06, style_function_jaras_06]},
+    "2010": {"Megye" :[district_10,style_function_10],"Járás" : [jaras_10, style_function_jaras_10]},
+    "2014": {"Megye" :[district_14,style_function_14],"Járás" : [jaras_14, style_function_jaras_14]},
+    "2018": {"Megye" :[district_18,style_function_18],"Járás" : [jaras_18, style_function_jaras_18]}
 }
 
 dicts = {
     "Megyek": {
-        "data": dicts_year[select_year][0],
-        "style": dicts_year[select_year][2],
+        "data": dicts_year[select_year]["Megye"][0],
+        "style": dicts_year[select_year]["Megye"][1],
         "handler": "NAME_1",
         "helyzet": [47, 20],
         "zoom": 7,
     },
     "Jarasok": {
-        "data": dicts_year[select_year][1],
-        "style": dicts_year[select_year][2],
+        "data": dicts_year[select_year]["Járás"][0],
+        "style": dicts_year[select_year]["Járás"][1],
         "handler": "name",
         "helyzet": [47, 20],
         "zoom": 7,
