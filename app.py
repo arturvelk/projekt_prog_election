@@ -40,9 +40,6 @@ data_district_14 = read_json("s3://election-sara-artur/val_14_megye.json")
 data_district_18 = read_json("s3://election-sara-artur/val_18_megye.json")
 
 
-hu_shape_district = read_json("s3://election-sara-artur/hu_distrcit.geojson")
-data_district = read_json("s3://election-sara-artur/sample.json")
-
 hu_shape_jaras = read_json("s3://election-sara-artur/hu_jaras_90.geojson")
 data_jaras = read_json("s3://election-sara-artur/val_90_jaras.json")
 
@@ -62,20 +59,20 @@ select_year = st.sidebar.select_slider(
 )
 
 dicts_year = {
-    "1990": style_function_90,
-    "1994": style_function_94,
-    "1998": style_function_98,
-    "2002": style_function_02,
-    "2006": style_function_06,
-    "2010": style_function_10,
-    "2014": style_function_14,
-    "2018": style_function_18,
+    "1990": [district_90,style_function_90],
+    "1994": [district_94,style_function_94],
+    "1998": [district_98,style_function_98],
+    "2002": [district_02,style_function_02],
+    "2006": [district_06,style_function_06],
+    "2010": [district_10,style_function_10],
+    "2014": [district_14,style_function_14],
+    "2018": [district_18,style_function_18],
 }
 
 dicts = {
     "Megyek": {
-        "data": hu_shape_district,
-        "style": dicts_year[select_year],
+        "data": dicts_year[select_year][0],
+        "style": dicts_year[select_year][1],
         "handler": "NAME_1",
         "helyzet": [47, 20],
         "zoom": 7,
