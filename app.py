@@ -114,6 +114,9 @@ st.write("My First Streamlit Web App, csicskavok, csicska")
 
 select_data = st.sidebar.selectbox("What data do you want to see?",("Megyek", "Jarasok", "Budapest"))
 
+select_year = st.select_slider("Melyik év legyen?", options = ["1990","1994","1998","2002","2006","2010","2014","2018"])
+
+
 dicts = {"Megyek":{"data" : hu_shape_district, "style": style_function_district, "handler" : "NAME_1","helyzet" : [47,20], "zoom" : 7},
          "Jarasok":{"data" : hu_shape_jaras, "style": style_function_jaras, "handler":"name", "helyzet" : [47,20], "zoom" : 7},
          "Budapest":{"data" : hu_shape_budapest, "style": style_function_kerulet, "handler":"name", "helyzet" : [47.5, 19.1], "zoom" : 10.5}}
