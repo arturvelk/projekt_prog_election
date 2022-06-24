@@ -23,8 +23,8 @@ def read_json(filename):
 hu_shape_district = read_json("s3://election-sara-artur/hu_distrcit.geojson")
 data_district = read_json("s3://election-sara-artur/sample.json")
 
-hu_shape_jaras = read_json("s3://election-sara-artur/hu_jaras.geojson")
-data_jaras = read_json("s3://election-sara-artur/sample_jaras.json")
+hu_shape_jaras = read_json("s3://election-sara-artur/hu_jaras_90.geojson")
+data_jaras = read_json("s3://election-sara-artur/val_90_jaras.json")
 
 hu_shape_budapest = read_json("s3://election-sara-artur/hu_budapesz.geojson")
 data_kerulet = read_json("s3://election-sara-artur/val_90_kerület.json")
