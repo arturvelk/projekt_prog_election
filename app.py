@@ -37,7 +37,7 @@ def state_style(data, state,function=False):
     state_result = data[state]
     
     #Set state colours
-    if not state_style:
+    if not state_result:
         color = "#000000"
     if max(state_result, key=state_result.get) == "SZDSZ":
         color =  "#0783c7"#blue
