@@ -79,7 +79,7 @@ dicts_year = {
     "1990": {
         "Megye": [
             district_90,
-            style_function_90,
+            style_function_megye_90,
             ["MDF", "SZDSZ", "MSZP", "FIDESZ", "FKGP"],
         ],
         "Járás": [
