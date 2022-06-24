@@ -39,7 +39,7 @@ def state_style(data, state,function=False):
     #Set state colours
     if not state_result:
         color = "#000000"
-    if max(state_result, key=state_result.get) == "SZDSZ":
+    elif max(state_result, key=state_result.get) == "SZDSZ":
         color =  "#0783c7"#blue
     elif max(state_result, key=state_result.get) == "FKGP":
         color = "#445f2b"
@@ -87,7 +87,7 @@ def style_function_jaras(feature):
     style = state_style(data_jaras,state,function=True)
     
     return style
-
+#sa
 def style_function_kerulet(feature):
     """
     style_function used by the GeoJson folium function
