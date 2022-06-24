@@ -7,7 +7,25 @@ from streamlit_folium import folium_static
 import s3fs
 import os
 
+fs = s3fs.S3FileSystem(anon=False)
 
+#@st.experimental_memo(ttl=600)
+
+def read_file(filename):
+    with fs.open(filename) as f:
+        return f.read().decode("utf-8")
+
+def read_json(filename):
+    return json.loads(read_file(filename))
+
+hu_shape_district = read_json("s3://election-sara-artur/hu_distrcit.geojson")
+data_district = read_json("s3://election-sara-artur/sample.json")
+
+hu_shape_jaras = read_json("s3://election-sara-artur/hu_jaras_90.geojson")
+data_jaras = read_json("s3://election-sara-artur/val_90_jaras.json")
+
+hu_shape_budapest = read_json("s3://election-sara-artur/hu_budapesz.geojson")
+data_kerulet = read_json("s3://election-sara-artur/val_90_kerület.json")
 
 def state_style(data, state,function=False):
     """
